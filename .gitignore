@@ -1,0 +1,13 @@
+/src/*
+!/src/*.cpp
+!/src/*.c
+!/src/*.h
+!/src/*.hpp
+
+/Project/bin/*
+!/Project/bin/*.gdnlib
+!/Project/bin/*.gdns
+
+.sconsign.dblite
+
+/godot-cpp/*
