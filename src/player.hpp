@@ -11,7 +11,8 @@ class Player : public godot::Area2D {
 	GODOT_CLASS(Player, godot::Area2D)
 
 	godot::AnimatedSprite *_animated_sprite;
-	godot::CollisionShape2D *_collision_shape;
+	godot::CollisionShape2D *_collision_shape_head;
+    godot::CollisionShape2D *_collision_shape_body;
 	godot::Input *_input;
 	godot::Vector2 _screen_size; // Size of the game window.
 
