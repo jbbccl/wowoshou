@@ -1,6 +1,5 @@
 #include <Godot.hpp>
 
-
 #include "player.hpp"
 
 extern "C" void GDN_EXPORT godot_gdnative_init(godot_gdnative_init_options *o) {
