@@ -7,7 +7,7 @@ void Player::_ready() {
     _animated_sprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
     _collision_shape_head = get_node<godot::CollisionShape2D>("CollisionShape2DHead");
     _collision_shape_body = get_node<godot::CollisionShape2D>("CollisionShape2DBody");
-    //_input = godot::Input::get_singleton();//此处返回空指针，移动到_process了
+    _input = godot::Input::get_singleton();//此处返回空指针，移动到_process了
     //_screen_size = get_viewport_rect().size;//此处返回0,0，移动到_process了
     
     //TODO：
@@ -16,11 +16,9 @@ void Player::_ready() {
 
 
 void Player::_process(const double delta) {
-     godot::Vector2 velocity(0, 0);
+    godot::Vector2 velocity(0, 0);
 
-    if(time_passed<1.0){
-        _input = godot::Input::get_singleton();//移动到此处
-    }
+    if(_input==nullptr)_input = godot::Input::get_singleton();//移动到此处
 
 	velocity.x = _input->get_action_strength("move_right") - _input->get_action_strength("move_left");
 	velocity.y = _input->get_action_strength("move_down") - _input->get_action_strength("move_up");
@@ -38,16 +36,7 @@ void Player::_process(const double delta) {
 		//_animated_sprite->stop();
 	}
 
-    emit_signal("debug_information", this, velocity);
-    /**/
-    // time_passed += delta;
-
-    // godot::Vector2 new_position = godot::Vector2((10.0 + (10.0 * sin(time_passed * 2.0)))*_input->get_action_strength("move_right")
-    // , (10.0 + (10.0 * cos(time_passed * 1.5)))*_input->get_action_strength("move_right"));
-
-    // set_position(new_position);
-    // emit_signal("position_changed", this, new_position);
-    /**/
+    //emit_signal("debug_information", this, velocity);
 }
 
 
