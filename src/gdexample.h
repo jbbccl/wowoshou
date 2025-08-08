@@ -2,12 +2,12 @@
 #define GDEXAMPLE_H
 
 #include <Godot.hpp>
-#include <Sprite.hpp>
+#include <Area2D.hpp>
 
 namespace godot {
 
-class GDExample : public Sprite {
-    GODOT_CLASS(GDExample, Sprite)
+class GDExample : public Area2D {
+    GODOT_CLASS(GDExample, Area2D)
 
 private:
     float time_passed;
