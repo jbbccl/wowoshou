@@ -17,13 +17,11 @@ class Player : public godot::Area2D {
 	godot::Vector2 _screen_size; // Size of the game window.
 
 private:
-
+	bool toward;
 public:
 	real_t speed = 400; // How fast the player will move (pixels/sec).
 
-	void _init(){
-
-    }
+	void _init(){}
 	void _ready();
 	void _process(const double p_delta);
 	void start(const godot::Vector2 p_position);
