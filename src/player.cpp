@@ -1,27 +1,56 @@
 #include "player.hpp"
 
-using namespace godot;
+
+void Player::_ready() {
+    _animated_sprite = get_node<godot::AnimatedSprite>("AnimatedSprite");
+    //_collision_shape = get_node<godot::CollisionShape2D>("CollisionShape2D");
+    //_input = godot::Input::get_singleton();//此处返回空指针，移动到_process了
+    //_screen_size = get_viewport_rect().size;//此处返回0,0，移动到_process了
+
+    //TODO：
+    //找到_ready中不能正确取值的n原因
+}
+
+
+void Player::_process(const double delta) {
+     godot::Vector2 velocity(0, 0);
+
+    if(time_passed<1.0){
+        _input = godot::Input::get_singleton();//移动到此处
+    }
+
+	velocity.x = _input->get_action_strength("move_right") - _input->get_action_strength("move_left");
+	velocity.y = _input->get_action_strength("move_down") - _input->get_action_strength("move_up");
+
+	if (velocity.length() > 0) {
+		velocity = velocity.normalized() * speed;
+		//_animated_sprite->play();
+	} else {
+		//_animated_sprite->stop();
+	}
+
+
+
+	godot::Vector2 position = get_position();
+	position += velocity * (real_t)delta;
+    _screen_size = get_viewport_rect().size;//移动到此处
+	position.x = godot::Math::clamp(position.x, (real_t)0.0, _screen_size.x);
+	position.y = godot::Math::clamp(position.y, (real_t)0.0, _screen_size.y);
+	set_position(position);
+
+    /**/
+    // time_passed += delta;
+
+    // godot::Vector2 new_position = godot::Vector2((10.0 + (10.0 * sin(time_passed * 2.0)))*_input->get_action_strength("move_right")
+    // , (10.0 + (10.0 * cos(time_passed * 1.5)))*_input->get_action_strength("move_right"));
+
+    // set_position(new_position);
+    // emit_signal("position_changed", this, new_position);
+    /**/
+}
+
 
 void Player::_register_methods() {
-    register_method("_process", &Player::_process);
-}
-
-Player::Player() {
-}
-
-Player::~Player() {
-    // add your cleanup here
-}
-
-void Player::_init() {
-    // initialize any variables here
-    time_passed = 0.0;
-}
-
-void Player::_process(float delta) {
-    time_passed += delta;
-
-    Vector2 new_position = Vector2(10.0 + (10.0 * sin(time_passed * 2.0)), 10.0 + (10.0 * cos(time_passed * 1.5)));
-
-    set_position(new_position);
+    godot::register_method("_process", &Player::_process);
+    godot::register_signal<Player>((char *)"position_changed", "node", GODOT_VARIANT_TYPE_OBJECT, "new_pos", GODOT_VARIANT_TYPE_VECTOR2);
 }

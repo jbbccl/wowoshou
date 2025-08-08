@@ -1,28 +1,35 @@
-#ifndef GDEXAMPLE_H
-#define GDEXAMPLE_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
-#include <Godot.hpp>
+#include <AnimatedSprite.hpp>
 #include <Area2D.hpp>
+#include <CollisionShape2D.hpp>
+#include <Godot.hpp>
+#include <Input.hpp>
 
-namespace godot {
+class Player : public godot::Area2D {
+	GODOT_CLASS(Player, godot::Area2D)
 
-class Player : public Area2D {
-    GODOT_CLASS(Player, Area2D)
+	godot::AnimatedSprite *_animated_sprite;
+	godot::CollisionShape2D *_collision_shape;
+	godot::Input *_input;
+	godot::Vector2 _screen_size; // Size of the game window.
 
 private:
     float time_passed;
 
 public:
-    static void _register_methods();
+	real_t speed = 400; // How fast the player will move (pixels/sec).
 
-    Player();
-    ~Player();
+	void _init(){
+        time_passed = 0.0;
+    }
+	void _ready();
+	void _process(const double p_delta);
+	void start(const godot::Vector2 p_position);
+	void _on_Player_body_entered(godot::Node2D *_body);
 
-    void _init(); // our initializer called by Godot
-
-    void _process(float delta);
+	static void _register_methods();
 };
 
-}
-
-#endif
+#endif 
