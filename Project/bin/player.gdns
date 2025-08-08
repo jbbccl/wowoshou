@@ -5,5 +5,5 @@
 [resource]
 
 resource_name = "player"
-class_name = "GDExample"
+class_name = "Player"
 library = ExtResource( 1 )

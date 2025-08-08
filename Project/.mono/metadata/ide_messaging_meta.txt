@@ -1,2 +1,0 @@
-﻿34733
-/home/VirtualMechine/project/Godot_v3.5.3/Godot_v3.5.3-stable_mono_x11.64

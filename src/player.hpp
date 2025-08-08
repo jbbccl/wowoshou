@@ -6,8 +6,8 @@
 
 namespace godot {
 
-class GDExample : public Area2D {
-    GODOT_CLASS(GDExample, Area2D)
+class Player : public Area2D {
+    GODOT_CLASS(Player, Area2D)
 
 private:
     float time_passed;
@@ -15,8 +15,8 @@ private:
 public:
     static void _register_methods();
 
-    GDExample();
-    ~GDExample();
+    Player();
+    ~Player();
 
     void _init(); // our initializer called by Godot
 
