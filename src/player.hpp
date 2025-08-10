@@ -8,6 +8,9 @@
 #include <Input.hpp>
 #include <InputEventMouseButton.hpp>
 #include <Viewport.hpp>
+#include <PackedScene.hpp>
+#include <ResourceLoader.hpp>
+
 
 class Player : public godot::Area2D {
 	GODOT_CLASS(Player, godot::Area2D)
@@ -15,8 +18,13 @@ class Player : public godot::Area2D {
 	godot::AnimatedSprite *_animated_sprite;
 	godot::CollisionShape2D *_collision_shape_head;
     godot::CollisionShape2D *_collision_shape_body;
+
+	//场景
+	godot::Ref<godot::PackedScene> shou_sence;
+	
 	godot::Input *_input;
 	godot::Viewport* _viewport;
+	godot::ResourceLoader* _resourceLoader;
 	godot::Vector2 _screen_size; // Size of the game window.
 
 private:
@@ -31,6 +39,8 @@ public:
 	void _on_Player_body_entered(godot::Node2D *_body);
 
 	static void _register_methods();
+
+	void spawn_shou(godot::Vector2 pos);
 };
 
 #endif 
