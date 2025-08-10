@@ -20,7 +20,7 @@ class Player : public godot::Area2D {
     godot::CollisionShape2D *_collision_shape_body;
 
 	//场景
-	godot::Ref<godot::PackedScene> shou_sence;
+	
 	
 	godot::Input *_input;
 	godot::Viewport* _viewport;
@@ -29,6 +29,7 @@ class Player : public godot::Area2D {
 
 private:
 	bool toward;
+	//bool shou_lock = 0;
 public:
 	real_t speed = 400; // How fast the player will move (pixels/sec).
 
@@ -40,7 +41,11 @@ public:
 
 	static void _register_methods();
 
+protected://子类可访问的
+	godot::Ref<godot::PackedScene> shou_sence;
 	void spawn_shou(godot::Vector2 pos);
+	godot::Node* shou=nullptr;
+	int shou_dist;
 };
 
 #endif 

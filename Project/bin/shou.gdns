@@ -4,6 +4,6 @@
 
 [resource]
 
-resource_name = "Main"
-class_name = "Main"
+resource_name = "Shou"
+class_name = "Shou"
 library = ExtResource( 1 )

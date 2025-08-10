@@ -12,6 +12,7 @@ void Player::_ready() {
     //godot::Godot::print("test");
     //节点
     shou_sence = _resourceLoader->load("res://Main/shou.tscn");
+    shou_dist=100;
 }
 
 
@@ -42,9 +43,11 @@ void Player::_process(const double delta) {
     if(_input->get_action_strength("shou")){
         godot::Vector2 mouse_pos = _viewport->get_mouse_position();
         godot::Vector2 shou_vec = mouse_pos-position;
-        shou_vec=shou_vec.normalized();
-        godot::Godot::print(shou_vec);
+        
+        //godot::Godot::print(shou_vec);
         spawn_shou(shou_vec);
+    }else{
+        //u删除手
     }
 
 
@@ -52,14 +55,14 @@ void Player::_process(const double delta) {
     //emit_signal("debug_information", this, velocity);
 }
 
-void Player::spawn_shou(godot::Vector2 pos){
-
-    if (shou_sence.is_valid()){
-        godot::Node* shou = shou_sence->instance();
-        add_child(shou);
-        shou->set("position", pos*100);
-    }
-}
+//还是这里？
+// void Player::spawn_shou(godot::Vector2 pos){
+//     if (shou_sence.is_valid()){
+//         godot::Node* shou = shou_sence->instance();
+//         add_child(shou);
+//         shou->set("position", pos*100);
+//     }
+// }
 
 
 void Player::_register_methods() {
