@@ -7,6 +7,7 @@
 #include <Godot.hpp>
 #include <Input.hpp>
 #include <InputEventMouseButton.hpp>
+#include <Viewport.hpp>
 
 class Player : public godot::Area2D {
 	GODOT_CLASS(Player, godot::Area2D)
@@ -15,6 +16,7 @@ class Player : public godot::Area2D {
 	godot::CollisionShape2D *_collision_shape_head;
     godot::CollisionShape2D *_collision_shape_body;
 	godot::Input *_input;
+	godot::Viewport* _viewport;
 	godot::Vector2 _screen_size; // Size of the game window.
 
 private:

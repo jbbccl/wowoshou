@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="shou" type="Node2D"]
+
+[node name="wowoshou" type="Area2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="wowoshou"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wowoshou"]

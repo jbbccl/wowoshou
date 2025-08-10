@@ -6,6 +6,7 @@ void Player::_ready() {
     _collision_shape_head = get_node<godot::CollisionShape2D>("CollisionShape2DHead");
     _collision_shape_body = get_node<godot::CollisionShape2D>("CollisionShape2DBody");
     _input = godot::Input::get_singleton();
+    _viewport = get_viewport();
     _screen_size = get_viewport_rect().size;
     godot::Godot::print("test");
 }
@@ -34,7 +35,11 @@ void Player::_process(const double delta) {
 		_animated_sprite->stop();
 	}
     
-    //点击
+    //点击  
+    if(_input->get_action_strength("shou")){
+        godot::Vector2 mouse_pos = _viewport->get_mouse_position();
+        godot::Godot::print(mouse_pos);
+    }
 
 
     //emit_signal("debug_information", this, velocity);
