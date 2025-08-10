@@ -12,7 +12,6 @@ void Player::_ready() {
     //godot::Godot::print("test");
     //节点
     shou_sence = _resourceLoader->load("res://Main/shou.tscn");
-    shou_dist=100;
 }
 
 
@@ -22,14 +21,14 @@ void Player::_process(const double delta) {
     //移动
 	velocity.x = _input->get_action_strength("move_right") - _input->get_action_strength("move_left");
 	velocity.y = _input->get_action_strength("move_down") - _input->get_action_strength("move_up");
-    godot::Vector2 position = get_position();
+    godot::Vector2 player_pos = get_position();
 
 	if (velocity.length() > 0) {
 		velocity = velocity.normalized() * speed;
-        position += velocity * (real_t)delta;
-        position.x = godot::Math::clamp(position.x, (real_t)0.0, _screen_size.x);
-        position.y = godot::Math::clamp(position.y, (real_t)0.0, _screen_size.y);
-        set_position(position);
+        player_pos += velocity * (real_t)delta;
+        player_pos.x = godot::Math::clamp(player_pos.x, (real_t)0.0, _screen_size.x);
+        player_pos.y = godot::Math::clamp(player_pos.y, (real_t)0.0, _screen_size.y);
+        set_position(player_pos);
         //动画
 		_animated_sprite->play();
         _animated_sprite->set_animation("default");
@@ -40,29 +39,19 @@ void Player::_process(const double delta) {
 	}
     
     //点击  
+    godot::Vector2 mouse_pos = _viewport->get_mouse_position();
     if(_input->get_action_strength("shou")){
-        godot::Vector2 mouse_pos = _viewport->get_mouse_position();
-        godot::Vector2 shou_vec = mouse_pos-position;
-        
         //godot::Godot::print(shou_vec);
-        spawn_shou(shou_vec);
-    }else{
+        spawn_shou(player_pos,mouse_pos);
+    }else if(shou!=nullptr){
         //u删除手
+        del_shou(player_pos,mouse_pos);
     }
 
 
 
     //emit_signal("debug_information", this, velocity);
 }
-
-//还是这里？
-// void Player::spawn_shou(godot::Vector2 pos){
-//     if (shou_sence.is_valid()){
-//         godot::Node* shou = shou_sence->instance();
-//         add_child(shou);
-//         shou->set("position", pos*100);
-//     }
-// }
 
 
 void Player::_register_methods() {

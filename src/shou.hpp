@@ -24,7 +24,9 @@ private:
 public:
 	real_t rad = 150; 
 
-	void _init(){}
+	void _init(){
+		godot::Godot::print("init_shou");
+	}
 	void _ready();
 	void _process(const double p_delta);
 

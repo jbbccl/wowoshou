@@ -43,9 +43,11 @@ public:
 
 protected://子类可访问的
 	godot::Ref<godot::PackedScene> shou_sence;
-	void spawn_shou(godot::Vector2 pos);
-	godot::Node* shou=nullptr;
+	void spawn_shou(godot::Vector2,godot::Vector2);
+	void del_shou(godot::Vector2,godot::Vector2);
+	godot::Node2D * shou=nullptr;
 	int shou_dist;
+	int shou_reach;
 };
 
 #endif 
