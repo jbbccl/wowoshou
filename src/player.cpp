@@ -13,6 +13,8 @@ void Player::_ready() {
     //节点
     shou_sence = _resourceLoader->load("res://Main/shou.tscn");
     sword_sence = _resourceLoader->load("res://Main/sword.tscn");
+
+    //set_z_index(0);
 }
 
 

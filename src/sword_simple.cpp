@@ -30,9 +30,10 @@ void Player::spawn_sword(const double delta){
         sword_offset_vec = godot::Vector2(godot::Math::cos(drow_sword_progress)*sword_offset_vec.x - 23*drow_sword_progress*drow_sword_progress, 
                                           godot::Math::sin(drow_sword_progress+0.5)*sword_offset_vec.y);
         sword->set("position", sword_offset_vec);
-
+    }else{
         sword->set_z_index(1);//刀在身前
-    }   
+    }
+    //
 }
 
 void Player::del_sword(const double delta){

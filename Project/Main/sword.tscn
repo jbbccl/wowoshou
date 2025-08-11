@@ -20,7 +20,6 @@ animations = [ {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2.5, 26 )
 rotation = -0.392699
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Area2D"]
