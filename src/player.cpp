@@ -12,6 +12,7 @@ void Player::_ready() {
     //godot::Godot::print("test");
     //节点
     shou_sence = _resourceLoader->load("res://Main/shou.tscn");
+    sword_sence = _resourceLoader->load("res://Main/sword.tscn");
 }
 
 
@@ -42,12 +43,19 @@ void Player::_process(const double delta) {
     godot::Vector2 mouse_pos = _viewport->get_mouse_position();
     if(_input->get_action_strength("shou")){
         //godot::Godot::print(shou_vec);
-        spawn_shou(player_pos,mouse_pos);
+        spawn_shou(player_pos,mouse_pos,delta);
     }else if(shou!=nullptr){
         //u删除手
-        del_shou(player_pos,mouse_pos);
+        del_shou(player_pos,mouse_pos,delta);
     }
 
+    if(_input->get_action_strength("sword")){
+        //拔刀 声明于player.hpp，an实现于simple_sword.cpp 下同 
+        spawn_sword(delta);
+    }else if(shou!=nullptr){
+        //u删除刀
+        del_sword(delta);
+    }
 
 
     //emit_signal("debug_information", this, velocity);

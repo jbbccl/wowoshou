@@ -1,7 +1,7 @@
 #include "shou.hpp"
 
 //在这个文件nn生成手
-void Player::spawn_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos){
+void Player::spawn_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos,const double delta){
     if(shou==nullptr){
         if (shou_sence.is_valid()){
             godot::Node *shou_node = shou_sence->instance();
@@ -12,7 +12,7 @@ void Player::spawn_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos){
         }
     }
     if(shou_dist<shou_reach){
-        shou_dist+=20;
+        shou_dist+=1500*delta;
     }
     //跟随手
     godot::Vector2 golbal_pos = shou->get_position();
@@ -25,9 +25,9 @@ void Player::spawn_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos){
     //godot::Godot::print(shou->get_position());
 }
 
-void Player::del_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos){
+void Player::del_shou(godot::Vector2 player_pos,godot::Vector2 mouse_pos,const double delta){
     if(shou_dist>8){
-        shou_dist-=20;
+        shou_dist-=1500*delta;
 
         godot::Vector2 shou_vec = mouse_pos - player_pos;
         godot::Godot::print(shou->get_position());
