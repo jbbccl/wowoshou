@@ -19,21 +19,20 @@ void Player::spawn_sword(const double delta){
     if(drow_sword_progress<3){
         //旋转刀身
         drow_sword_progress += delta;
-        drow_sword_progress*=1.2;//TODO但没必要：位运算优化
+        drow_sword_progress*=1.4;//TODO但没必要：位运算优化
         sword_angle_vec = godot::Vector2(godot::Math::cos(drow_sword_progress), 
                                         -godot::Math::sin(drow_sword_progress));
 
-        godot::Godot::print(drow_sword_progress);
+        godot::Godot::print(sword_offset_vec);
         sword->set("rotation", sword_angle_vec.angle());
 
-        //偏移刀身
-        sword_offset_vec = godot::Vector2(godot::Math::cos(drow_sword_progress)*sword_offset_vec.x - 26*drow_sword_progress*drow_sword_progress, 
-                                         godot::Math::sin(drow_sword_progress)*sword_offset_vec.y);
+        // //偏移刀身
+        sword_offset_vec = godot::Vector2(godot::Math::cos(drow_sword_progress)*sword_offset_vec.x - 23*drow_sword_progress*drow_sword_progress, 
+                                          godot::Math::sin(drow_sword_progress+0.5)*sword_offset_vec.y);
         sword->set("position", sword_offset_vec);
+
+        sword->set_z_index(1);//刀在身前
     }   
-
-    
-
 }
 
 void Player::del_sword(const double delta){
